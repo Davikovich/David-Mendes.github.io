@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>• Portfolio — [Votre Nom]</title>
+  <meta name="description" content="Portfolio de développeur web : compétences, langages pratiqués, et projets (Booki, Sophie Bluel, Nina Carducci, Kasa)." />
+  <meta name="theme-color" content="#111827">
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Portfolio — [Votre Nom]" />
+  <meta property="og:description" content="Développeur web — compétences, langages et projets." />
+  <meta property="og:image" content="" />
+  <meta property="og:url" content="https://votre-pseudo.github.io" />
+
+  <style>
+    /* Basé sur l'accessibilité (contraste élevé, taille lisible, focus visible). */
+    :root {
+      --bg: #0b0f1a;
+      --bg-2: #121826;
+      --text: #f3f4f6;
+      --muted: #cbd5e1;
+      --accent: #60a5fa; /* bleu accessible */
+      --card: #111827;
+      --border: #1f2937;
+      --shadow: 0 10px 20px rgba(0,0,0,.35);
+      --radius: 16px;
+      --maxw: 1100px;
+      --leading: 1.6;
+      --fs: 18px; /* taille de base */
+    }
+    /* Mode clair (selon préférence système) */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --bg-2: #f8fafc;
+        --text: #0b1220;
+        --muted: #334155;
+        --accent: #2563eb;
+        --card: #ffffff;
+        --border: #e5e7eb;
+        --shadow: 0 8px 16px rgba(2,6,23,.08);
+      }
+    }
+    /* Forcer le thème via .theme-light / .theme-dark */
+    .theme-dark { --bg:#0b0f1a; --bg-2:#121826; --text:#f3f4f6; --muted:#cbd5e1; --accent:#60a5fa; --card:#111827; --border:#1f2937; --shadow:0 10px 20px rgba(0,0,0,.35);} 
+    .theme-light { --bg:#ffffff; --bg-2:#f8fafc; --text:#0b1220; --muted:#334155; --accent:#2563eb; --card:#ffffff; --border:#e5e7eb; --shadow:0 8px 16px rgba(2,6,23,.08);} 
+
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: var(--leading);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      font-size: var(--fs);
+    }
+
+    /* Accessibilité : lien d'évitement */
+    .skip-link {
+      position: absolute; left: -9999px; top: auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus { left: 16px; top: 16px; width:auto; height:auto; padding:8px 12px; background:#000; color:#fff; border-radius:8px; z-index: 9999; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(8px);
+      background: color-mix(in oklab, var(--bg), transparent 35%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+    .brand { font-weight: 700; letter-spacing:.3px; }
+    .nav a { color: var(--text); text-decoration: none; margin-left: 16px; }
+    .nav a:hover, .nav a:focus { text-decoration: underline; text-underline-offset: 4px; }
+
+    .toolbar { display:flex; gap: 8px; align-items:center; }
+    .btn {
+      appearance: none; border:1px solid var(--border); background: var(--card); color: var(--text);
+      padding: 8px 12px; border-radius: 999px; cursor: pointer; box-shadow: var(--shadow);
+    }
+    .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    main { max-width: var(--maxw); margin: 0 auto; padding: 32px 20px 80px; }
+
+    .hero { display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; align-items: center; padding: 32px 0; }
+    .hero h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.15; margin: 0 0 8px; }
+    .hero p { margin: 0 0 16px; color: var(--muted); }
+    .tags { display:flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { border: 1px solid var(--border); background: var(--card); padding: 6px 10px; border-radius: 999px; font-size: 14px; }
+
+    .cards { display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card { grid-column: span 12; border: 1px solid var(--border); background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 6px; font-size: 20px; }
+    .card p { margin: 0 0 10px; color: var(--muted); }
+    .card .meta { font-size: 14px; color: var(--muted); }
+
+    /* Layouts responsives */
+    @media (min-width: 720px) {
+      .card.span-6 { grid-column: span 6; }
+      .card.span-4 { grid-column: span 4; }
+    }
+
+    .grid-skill { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    @media (min-width: 900px) { .grid-skill { grid-template-columns: repeat(3, 1fr); } }
+
+    .footer { max-width: var(--maxw); margin: 0 auto; padding: 24px 20px 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--border); }
+
+    /* Boutons taille de texte */
+    .text-size { display:flex; gap: 6px; }
+    .text-size button { font-weight: 600; }
+
+    a.btn-link { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid var(--border); background: var(--card); text-decoration:none; }
+    a.btn-link:hover, a.btn-link:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    .projects { margin-top: 8px; }
+    .project-actions { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+
+    /* Focus visible pour TOUT */
+    *:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <!-- Lien d'évitement -->
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header role="banner">
+    <nav class="nav" aria-label="Navigation principale">
+      <div class="brand" aria-label="Identité du site">[Votre Nom]</div>
+      <div class="toolbar">
+        <!-- Contrôles d'accessibilité rapides -->
+        <div class="text-size" role="group" aria-label="Taille du texte">
+          <button class="btn" id="textSm" title="Texte plus petit">A-</button>
+          <button class="btn" id="textMd" title="Texte normal">A</button>
+          <button class="btn" id="textLg" title="Texte plus grand">A+</button>
+        </div>
+        <button class="btn" id="toggleTheme" aria-pressed="false" aria-label="Basculer le thème">Thème</button>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenu" tabindex="-1">
+    <!-- SECTION HERO -->
+    <section class="hero" aria-labelledby="titre-hero">
+      <div>
+        <h1 id="titre-hero">Développeur Web — Front‑End</h1>
+        <p>Spécialisé en intégration accessible, performance web et SEO. Actuellement : OpenClassrooms • Projets : Booki, Sophie Bluel, Nina Carducci, Kasa.</p>
+        <div class="tags" aria-label="Compétences clés">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3 / Sass</span>
+          <span class="tag">JavaScript (ES6+)</span>
+          <span class="tag">React / Vite</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">jQuery (sélectif)</span>
+          <span class="tag">Performance (LCP, CSS critique)</span>
+          <span class="tag">Accessibilité</span>
+          <span class="tag">SEO & Open Graph</span>
+          <span class="tag">Git / GitHub</span>
+        </div>
+        <div class="project-actions" style="margin-top:14px">
+          <a class="btn-link" href="#projets" aria-label="Aller aux projets">Voir les projets</a>
+          <a class="btn-link" href="#competences" aria-label="Aller aux compétences">Voir les compétences</a>
+        </div>
+      </div>
+      <div class="card" aria-label="Résumé">
+        <h3>À propos</h3>
+        <p>Maçon de métier, je me spécialise en développement web front‑end.
+          Mon approche est orientée performance, qualité d'exécution et clarté de code.
+        </p>
+        <p class="meta">Basé en France • Disponible pour des missions.</p>
+      </div>
+    </section>
+
+    <!-- SECTION COMPÉTENCES -->
+    <section id="competences" class="cards" aria-labelledby="titre-competences">
+      <h2 id="titre-competences" class="sr-only">Compétences</h2>
+
+      <article class="card span-6" aria-labelledby="techs">
+        <h3 id="techs">Langages & Frameworks</h3>
+        <div class="grid-skill">
+          <div><strong>HTML5</strong><br><span class="meta">sémantique, ARIA, SEO on‑page</span></div>
+          <div><strong>CSS3 / Sass</strong><br><span class="meta">BEM, responsive, animations</span></div>
+          <div><strong>JavaScript (ES6+)</strong><br><span class="meta">modules, fetch, accessibilité</span></div>
+          <div><strong>React</strong><br><span class="meta">Router, composants réutilisables</span></div>
+          <div><strong>Vite</strong><br><span class="meta">build rapide, HMR</span></div>
+          <div><strong>Bootstrap / jQuery</strong><br><span class="meta">usage ciblé & optimisé</span></div>
+        </div>
+      </article>
+
+      <article class="card span-6" aria-labelledby="pratiques">
+        <h3 id="pratiques">Pratiques & Outils</h3>
+        <div class="grid-skill">
+          <div><strong>Performance</strong><br><span class="meta">LCP, CSS critique, lazy‑loading</span></div>
+          <div><strong>Accessibilité</strong><br><span class="meta">a11y, focus, contrastes</span></div>
+          <div><strong>SEO</strong><br><span class="meta">balises, Open Graph, local SEO</span></div>
+          <div><strong>Git / GitHub</strong><br><span class="meta">workflow, PR, Pages</span></div>
+          <div><strong>Figma</strong><br><span class="meta">lecture de maquettes</span></div>
+          <div><strong>Qualité</strong><br><span class="meta">structure, commentaires pédagogiques</span></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION PROJETS -->
+    <section id="projets" class="cards projects" aria-labelledby="titre-projets">
+      <h2 id="titre-projets">Projets</h2>
+
+      <article class="card span-6" aria-labelledby="p-booki">
+        <h3 id="p-booki">Booki — Intégration responsive</h3>
+        <p>Première intégration complète à partir d'une maquette. Focus sur sémantique HTML, responsive et structure CSS claire.</p>
+        <p class="meta">Stack : HTML, CSS</p>
+        <div class="project-actions">
+          <a class="btn-link" href="#" aria-label="Voir le dépôt GitHub de Booki">Code GitHub</a>
+          <a class="btn-link" href="#" aria-label="Voir la démo en ligne de Booki">Démo</a>
+        </div>
+      </article>
+
+      <article class="card span-6" aria-labelledby="p-sophie">
+        <h3 id="p-sophie">Sophie Bluel — Galerie administrable</h3>
+        <p>Application front avec modale d'ajout d'image, aperçu et suppression. Respect strict du cahier des charges.</p>
+        <p class="meta">Stack : HTML, CSS, JavaScript</p>
+        <div class="project-actions">
+          <a class="btn-link" href="#" aria-label="Voir le dépôt GitHub de Sophie Bluel">Code GitHub</a>
+          <a class="btn-link" href="#" aria-label="Voir la démo en ligne de Sophie Bluel">Démo</a>
+        </div>
+      </article>
+
+      <article class="card span-6" aria-labelledby="p-nina">
+        <h3 id="p-nina">Nina Carducci — Performance & SEO</h3>
+        <p>Optimisations LCP, CSS critique inline, préchargement des images, scripts différés, balises sémantiques et Open Graph.</p>
+        <p class="meta">Stack : HTML, CSS, JavaScript, Bootstrap, jQuery</p>
+        <div class="project-actions">
+          <a class="btn-link" href="#" aria-label="Voir le dépôt GitHub de Nina Carducci">Code GitHub</a>
+          <a class="btn-link" href="#" aria-label="Voir la démo en ligne de Nina Carducci">Démo</a>
+        </div>
+      </article>
+
+      <article class="card span-6" aria-labelledby="p-kasa">
+        <h3 id="p-kasa">Kasa — SPA React</h3>
+        <p>Refonte en React avec Vite. Composants Gallery et Collapse (navigation circulaire, hauteur fixe, boutons conditionnels, animations CSS).</p>
+        <p class="meta">Stack : React, Vite, Sass</p>
+        <div class="project-actions">
+          <a class="btn-link" href="#" aria-label="Voir le dépôt GitHub de Kasa">Code GitHub</a>
+          <a class="btn-link" href="#" aria-label="Voir la démo en ligne de Kasa">Démo</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION CONTACT -->
+    <section id="contact" class="cards" aria-labelledby="titre-contact">
+      <h2 id="titre-contact">Contact</h2>
+      <article class="card" aria-label="Coordonnées">
+        <p>Intéressé(e) pour collaborer ?
+          <br>Envoyez‑moi un email :
+          <a class="btn-link" href="mailto:prenom.nom@email.com" aria-label="Envoyer un email">prenom.nom@email.com</a>
+        </p>
+        <p class="meta">Ou consultez mon GitHub : <a class="btn-link" href="https://github.com/votre-pseudo" target="_blank" rel="noopener">@votre-pseudo</a></p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    © <span id="year"></span> [Votre Nom] — Fait avec accessibilité, performance et ❤️.
+  </footer>
+
+  <script>
+    // Préférences utilisateur : thème et taille de police
+    const root = document.documentElement;
+    const btnTheme = document.getElementById('toggleTheme');
+    const btnSm = document.getElementById('textSm');
+    const btnMd = document.getElementById('textMd');
+    const btnLg = document.getElementById('textLg');
+
+    // Année du footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function setTheme(mode) {
+      document.body.classList.remove('theme-light', 'theme-dark');
+      if (mode) document.body.classList.add(mode);
+      localStorage.setItem('theme', mode || '');
+      btnTheme.setAttribute('aria-pressed', mode === 'theme-dark');
+    }
+    function setFontSize(sizePx) {
+      root.style.setProperty('--fs', sizePx + 'px');
+      localStorage.setItem('fs', String(sizePx));
+    }
+    // Charger préférences
+    (function initPrefs(){
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) setTheme(savedTheme);
+      const savedFs = parseInt(localStorage.getItem('fs') || '18', 10);
+      if (savedFs) setFontSize(savedFs);
+    })();
+
+    btnTheme.addEventListener('click', () => {
+      const isDark = document.body.classList.contains('theme-dark');
+      setTheme(isDark ? 'theme-light' : 'theme-dark');
+    });
+    btnSm.addEventListener('click', () => setFontSize(Math.max(14, parseInt(getComputedStyle(root).getPropertyValue('--fs')) - 2)));
+    btnMd.addEventListener('click', () => setFontSize(18));
+    btnLg.addEventListener('click', () => setFontSize(Math.min(24, parseInt(getComputedStyle(root).getPropertyValue('--fs')) + 2)));
+  </script>
+
+  <!-- Schéma JSON-LD pour un meilleur SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "[Votre Nom]",
+    "jobTitle": "Développeur web front-end",
+    "url": "https://votre-pseudo.github.io",
+    "sameAs": ["https://github.com/votre-pseudo"],
+    "knowsAbout": [
+      "HTML5", "CSS", "Sass", "JavaScript", "React", "Vite", "Bootstrap", "jQuery",
+      "Accessibilité web", "Performance web", "SEO", "Open Graph"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance"
+    }
+  }
+  </script>
+</body>
+</html>
